@@ -17,7 +17,7 @@ namespace MusicApi.Services.Tracks
             this.dbContext = dbContext;
         }
 
-        public Response<List<TrackJsonModel>> CreateTrack(TrackJsonModel model, string currentUserId)
+        public CustomResponse<List<TrackJsonModel>> CreateTrack(TrackJsonModel model, string currentUserId)
         {
             var trackType = (Enums.TrackType)model.Type;
 
@@ -37,13 +37,13 @@ namespace MusicApi.Services.Tracks
             return GetTracks();
         }
 
-        public Response<bool> DeleteTrack(int trackId, string currentUserId)
+        public CustomResponse<bool> DeleteTrack(int trackId, string currentUserId)
         {
             var track = dbContext.Tracks.FirstOrDefault(t => t.Id == trackId);
 
             if (track == null)
             {
-                return new Response<bool>
+                return new CustomResponse<bool>
                 {
                     Message = "Invalid track id!",
                     Success = false,
@@ -53,20 +53,20 @@ namespace MusicApi.Services.Tracks
             dbContext.Tracks.Remove(track);
             dbContext.SaveChanges(currentUserId);
 
-            return new Response<bool>
+            return new CustomResponse<bool>
             {
                 Message = "Success",
                 Success = true,
             };
         }
 
-        public Response<List<TrackJsonModel>> EditTrack(TrackJsonModel model, string currentUserId)
+        public CustomResponse<List<TrackJsonModel>> EditTrack(TrackJsonModel model, string currentUserId)
         {
            var track = dbContext.Tracks.FirstOrDefault(t => t.Id == model.Id);
 
             if (track == null)
             {
-                return new Response<List<TrackJsonModel>>
+                return new CustomResponse<List<TrackJsonModel>>
                 {
                     Status = "Failed",
                     Message = "Invalid Track Id!"
@@ -88,7 +88,7 @@ namespace MusicApi.Services.Tracks
 
         }
 
-        public Response<List<TrackJsonModel>> GetTracks()
+        public CustomResponse<List<TrackJsonModel>> GetTracks()
         {
             var data = dbContext.Tracks
                 .Include(x => x.Album)
@@ -106,7 +106,7 @@ namespace MusicApi.Services.Tracks
                     CreatedById = x.CreatedById,
                 }).ToList();
 
-            return new Response<List<TrackJsonModel>>
+            return new CustomResponse<List<TrackJsonModel>>
             {
                 Data = data,
                 Status = "Success",
