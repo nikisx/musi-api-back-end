@@ -23,7 +23,7 @@ namespace MusicApi.Controllers
 
 
         [Route("get-all")]
-        public Response<List<TrackJsonModel>> GetAll()
+        public CustomResponse<List<TrackJsonModel>> GetAll()
         {
             var result = this.trackService.GetTracks();
 
@@ -33,7 +33,7 @@ namespace MusicApi.Controllers
         [Authorize]
         [HttpPost]
         [Route("create-track")]
-        public Response<List<TrackJsonModel>> CreateTrack([FromBody] TrackJsonModel model)
+        public CustomResponse<List<TrackJsonModel>> CreateTrack([FromBody] TrackJsonModel model)
         {
             string userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
             var result = this.trackService.CreateTrack(model, userId);
@@ -44,7 +44,7 @@ namespace MusicApi.Controllers
         [Authorize]
         [HttpPost]
         [Route("edit-track")]
-        public Response<List<TrackJsonModel>> EditTrack([FromBody] TrackJsonModel model)
+        public CustomResponse<List<TrackJsonModel>> EditTrack([FromBody] TrackJsonModel model)
         {
             string userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
             var result = this.trackService.EditTrack(model, userId);
@@ -55,7 +55,7 @@ namespace MusicApi.Controllers
         [Authorize]
         [HttpPost]
         [Route("delete")]
-        public Response<bool> DeleteTrack([FromBody] TrackJsonModel model)
+        public CustomResponse<bool> DeleteTrack([FromBody] TrackJsonModel model)
         {
             string userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
             var result = this.trackService.DeleteTrack(model.Id, userId);
