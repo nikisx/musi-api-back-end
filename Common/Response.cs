@@ -1,6 +1,6 @@
 ﻿namespace MusicApi.Common
 {
-    public class Response<T>
+    public class CustomResponse<T>
     {
         public string Status { get; set; }
         public bool Success { get; set; }
