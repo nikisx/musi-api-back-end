@@ -14,6 +14,6 @@ namespace MusicApi.Entiites
 
         public bool IsPublic { get; set; }
 
-        ICollection<TrackPlaylist> Tracks { get; set; } = new HashSet<TrackPlaylist>();
+        public ICollection<TrackPlaylist> Tracks { get; set; } = new HashSet<TrackPlaylist>();
     }
 }
