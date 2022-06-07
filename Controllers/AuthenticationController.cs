@@ -67,7 +67,7 @@ namespace MusicApi.Controllers
 
             if (userExists != null)
             {
-                return BadRequest(new Response<int>
+                return BadRequest(new CustomResponse<int>
                 {
                     Status = "Failed",
                     Success = false,
@@ -83,7 +83,7 @@ namespace MusicApi.Controllers
 
                 if (result.Succeeded)
                 {
-                    return Ok(new Response<int>
+                    return Ok(new CustomResponse<int>
                     {
                         Status = "Success",
                         Success = true,
@@ -92,7 +92,7 @@ namespace MusicApi.Controllers
                 }
                 else
                 {
-                    return BadRequest(new Response<int>
+                    return BadRequest(new CustomResponse<int>
                     {
                         Status = "Failed",
                         Success = false,
