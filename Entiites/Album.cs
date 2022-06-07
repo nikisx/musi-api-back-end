@@ -10,6 +10,6 @@ namespace MusicApi.Entiites
         public string Name { get; set; }
         public string ImageUrl { get; set; }
 
-        ICollection<Track> Tracks { get; set; } = new HashSet<Track>();
+        public ICollection<Track> Tracks { get; set; } = new HashSet<Track>();
     }
 }
